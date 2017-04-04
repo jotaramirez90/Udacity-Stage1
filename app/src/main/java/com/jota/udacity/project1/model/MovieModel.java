@@ -23,12 +23,16 @@ public class MovieModel implements Parcelable {
     this.title = title;
   }
 
-  public String getPoster() {
-    return poster;
+  public String getNormalPoster() {
+    return Repository.BASE_IMAGE_URL + poster;
+  }
+
+  public String getBigPoster() {
+    return Repository.BASE_BIG_IMAGE_URL + poster;
   }
 
   public void setPoster(String poster) {
-    this.poster = Repository.BASE_IMAGE_URL + poster;
+    this.poster = poster;
   }
 
   public String getSynopsis() {

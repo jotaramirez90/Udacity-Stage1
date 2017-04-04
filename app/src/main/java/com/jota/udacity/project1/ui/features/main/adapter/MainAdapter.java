@@ -59,7 +59,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     }
 
     public void bind(Context context, MovieModel movieModel) {
-      Picasso.with(context).load(movieModel.getPoster()).into(imageView);
+      Picasso.with(context).load(movieModel.getNormalPoster()).into(imageView);
     }
   }
 

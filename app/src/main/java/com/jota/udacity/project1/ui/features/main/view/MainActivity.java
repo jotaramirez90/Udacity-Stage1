@@ -13,12 +13,15 @@ import com.jota.udacity.project1.R;
 import com.jota.udacity.project1.app.BaseActivity;
 import com.jota.udacity.project1.app.navigator.Navigator;
 import com.jota.udacity.project1.model.MovieModel;
+import com.jota.udacity.project1.ui.common.GridItemDecoration;
 import com.jota.udacity.project1.ui.features.BasePresenter;
 import com.jota.udacity.project1.ui.features.main.adapter.MainAdapter;
 import com.jota.udacity.project1.ui.features.main.presenter.MainPresenter;
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity implements MainAdapter.OnMovieItemClickListener {
+
+  private static final int NUM_COLUMNS = 2;
 
   private MainPresenter mMainPresenter;
   private ProgressBar mMainProgressBar;
@@ -41,6 +44,12 @@ public class MainActivity extends BaseActivity implements MainAdapter.OnMovieIte
     super.onCreate(savedInstanceState);
     mMainProgressBar = (ProgressBar) findViewById(R.id.pb_main);
     mMainRecyclerView = (RecyclerView) findViewById(R.id.rv_main);
+
+    mMainRecyclerView.setLayoutManager(new GridLayoutManager(this, NUM_COLUMNS));
+    mMainRecyclerView.setHasFixedSize(true);
+    GridItemDecoration itemDecoration = new GridItemDecoration(
+        getResources().getDimensionPixelSize(R.dimen.grid_decoration_spacing), NUM_COLUMNS);
+    mMainRecyclerView.addItemDecoration(itemDecoration);
   }
 
   @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,8 +78,6 @@ public class MainActivity extends BaseActivity implements MainAdapter.OnMovieIte
   public void setMovies(ArrayList<MovieModel> movieModels) {
     mMainProgressBar.setVisibility(View.GONE);
     MainAdapter adapter = new MainAdapter(movieModels, this);
-    mMainRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-    mMainRecyclerView.setHasFixedSize(true);
     mMainRecyclerView.setAdapter(adapter);
     mMainRecyclerView.setVisibility(View.VISIBLE);
   }

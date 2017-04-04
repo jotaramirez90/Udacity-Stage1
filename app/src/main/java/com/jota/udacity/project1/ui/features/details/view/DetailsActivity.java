@@ -18,19 +18,12 @@ public class DetailsActivity extends BaseActivity {
 
   public static final String PARAM_MOVIE = "movieParam";
 
-  private DetailsPresenter mDetailsPresenter;
-  private ImageView mPosterImageView;
-  private TextView mSynopsisTextView;
-  private TextView mDateTextView;
-  private TextView mRatingTextView;
-
   public static Intent getCallingIntent(Context context) {
     return new Intent(context, DetailsActivity.class);
   }
 
   @Override protected BasePresenter bindPresenter() {
-    mDetailsPresenter = new DetailsPresenter();
-    return mDetailsPresenter;
+    return new DetailsPresenter();
   }
 
   @Override protected int bindLayout() {
@@ -43,14 +36,14 @@ public class DetailsActivity extends BaseActivity {
     setSupportActionBar(toolbar);
     MovieModel movieModel = getIntent().getParcelableExtra(PARAM_MOVIE);
 
-    mPosterImageView = (ImageView) findViewById(R.id.iv_poster);
-    mDateTextView = (TextView) findViewById(R.id.tv_date);
-    mRatingTextView = (TextView) findViewById(R.id.tv_rating);
-    mSynopsisTextView = (TextView) findViewById(R.id.tv_synopsis);
+    ImageView mPosterImageView = (ImageView) findViewById(R.id.iv_poster);
+    TextView mDateTextView = (TextView) findViewById(R.id.tv_date);
+    TextView mRatingTextView = (TextView) findViewById(R.id.tv_rating);
+    TextView mSynopsisTextView = (TextView) findViewById(R.id.tv_synopsis);
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setTitle(movieModel.getTitle());
-    Picasso.with(this).load(movieModel.getPoster()).into(mPosterImageView);
+    Picasso.with(this).load(movieModel.getBigPoster()).into(mPosterImageView);
     mDateTextView.setText(movieModel.getDate());
     mRatingTextView.setText(movieModel.getRating());
     mSynopsisTextView.setText(movieModel.getSynopsis());
