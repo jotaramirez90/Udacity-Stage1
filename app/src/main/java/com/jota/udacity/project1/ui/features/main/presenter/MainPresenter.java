@@ -17,11 +17,6 @@ import org.json.JSONObject;
 
 public class MainPresenter extends BasePresenter<MainActivity> {
 
-  @Override public void create() {
-    super.create();
-    getPopularMovies();
-  }
-
   public void getPopularMovies() {
     new MoviesTask().execute(Repository.getPopularMovies());
   }
